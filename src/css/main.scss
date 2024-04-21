@@ -1,0 +1,116 @@
+// @use "sass:math";
+
+:root {
+    /* grid variables */
+    --size: 20px;
+    --gap: 2px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+  
+body {
+    margin: 0 auto;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    font-family: system-ui;
+    background-color: #004;
+    color: white;
+}
+  
+main {
+    width: 1040px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 3em;
+}
+
+.logic-box {
+    display: flex;
+    margin-bottom: 40px;
+    justify-content: center;
+    gap: 20px;
+}
+
+input[type="number"] {
+    width: 100px;
+}
+
+button {
+    padding: 15px 20px;
+    border: 0;
+    border-radius: 8px;
+    background-color:#146;
+    color:#fff;
+    cursor: pointer;
+}
+  
+.gallery {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, var(--size) );
+    grid-template-rows: repeat(auto-fit, var(--size) );
+    place-items: start center;
+    gap: var(--gap) calc(var(--gap)/3);
+    transition: all .3s ease-in-out
+}
+
+.gallery-img {
+    width: calc(var(--size) * 6);
+    height: calc(var(--size) * 6);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    grid-column: auto / span 6;
+    grid-row: auto / span 8;
+    background-color: #1473c9;
+    color: white;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.gallery-img:before {
+    content: '';
+    background-color: #146;
+    width: calc(var(--size) * 6);
+    height: calc(var(--size) * 6);
+    display: block;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    position: absolute;
+    transform: scale(0.95);
+}
+
+.gallery-img span {
+    font-size: 28px;
+    position: relative;
+}
+  
+.gallery:hover {
+    --gap: 10px;
+}
+  
+.gallery-img:hover:before {
+    background-color: darkcyan;
+}
+
+@for $i from 1 through 20 {
+    @if $i % 2 == 0 {
+        .staggered-#{$i} {
+            transform: translateY(calc((-25%*#{$i}) + (var(--gap) *#{$i} )));
+        }
+    } @else {
+        .staggered-#{$i} {
+            transform: translateX(calc(50% + var(--gap))) translateY(calc((-25% * #{$i}) + (var(--gap) * #{$i})));
+        }
+    }
+    
+}

@@ -85,7 +85,7 @@ function App() {
 
   return (
     <>
-      <h1>Dinamic Hexagonal CSS Grid</h1>
+      <h1>Dynamic Hexagonal CSS Grid</h1>
 
       <div className='logic-box'>
         <input type="number" value={inputValue} min="0" onChange={handleInputChange} />
